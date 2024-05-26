@@ -1,0 +1,42 @@
+.benefits-section {
+    margin-top: 100px;
+    margin-bottom: 120px;
+
+    &__content {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 60px;
+
+        div {
+            max-width: 200px;
+            text-align: center;
+
+            svg {
+                font-size: 80px;
+                color: #FF6875;
+            }
+
+            h3 {
+                margin-top: 16px;
+                font-family: Poppins500;
+                font-size: 27px;
+                color: #22262A;
+
+            }
+
+            p {
+                margin-top: 12px;
+                color: #22262A;
+            }
+        }
+    }
+}
+
+@media (max-width: 752px) {
+    .benefits-section {
+        &__content {
+            justify-content: center !important;
+        }
+    }
+}

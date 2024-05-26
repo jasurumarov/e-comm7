@@ -1,0 +1,30 @@
+.hero-section {
+    position: relative;
+
+    img {
+        width: 100%;
+        object-fit: cover;
+
+    }
+
+    &__content {
+        h1 {
+            max-width: 570px;
+            position: absolute;
+            top: 40%;
+            font-family: Poppins700;
+            font-size: 64px;
+            // line-height: 96px;
+            letter-spacing: 0.5px;
+            color: white;
+        }
+    }
+}
+
+@media (max-width: 600px) {
+    .hero-section {
+        h1 {
+            font-size: 38px !important;
+        }
+    }
+}
