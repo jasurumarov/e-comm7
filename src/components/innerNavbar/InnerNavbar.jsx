@@ -7,7 +7,7 @@ const InnerNavbar = ({outerPage, activePage}) => {
         <div className="container">
             <div className="innerNavbar__content">
                 <Link href={"/"}>Home</Link>
-                <span>/</span>
+                <span className='first-slash'>/</span>
                 <p className='innerNavbar__link'>{outerPage}</p>
                 <span>/</span>
                 <p>{activePage}</p>
