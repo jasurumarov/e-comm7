@@ -6,6 +6,7 @@ import Image from 'next/image'
 import { FaStar } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa6";
 import { LuShoppingCart } from "react-icons/lu";
+import Link from 'next/link';
 
 const Products = ({ data, category }) => {
     const [valueOfCategory, setValueOfCategory] = useState('all')
@@ -26,7 +27,7 @@ const Products = ({ data, category }) => {
                     <button><LuShoppingCart /></button>
                 </div>
             </div>
-            <h3>{el.title}</h3>
+            <Link href={`/product/${el.id}`}><h3>{el.title}</h3></Link>
             <div className='products__card-stars'>
                 {[...Array(5)].map((item, i) => (
                     <FaStar key={i} className={i < Math.round(el.rating.rate) ? 'rate' : 'unrate'} />

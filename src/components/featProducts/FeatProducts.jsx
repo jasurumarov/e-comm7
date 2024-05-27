@@ -1,16 +1,21 @@
 'use client'
-import Image from 'next/image'
 import React from 'react'
+import Link from 'next/link'
+import Image from 'next/image'
+
+// Icons
 import { FaStar } from 'react-icons/fa'
 
 const FeatProducts = ({ data }) => {
     let products = data?.slice(0, 3)?.map(el => (
         <div key={el.id} className="featProducts__card">
             <article>
-                <Image src={el.image} alt={el.title} width={152} height={152} />
+                <Link href={`/product/${el.id}`}>
+                    <Image src={el.image} alt={el.title} width={152} height={152} />
+                </Link>
             </article>
             <div className='featProducts__card-title'>
-                <h3>{el.title} Brown</h3>
+                <Link href={`/product/${el.id}`}><h3 title={el.title}>{el.title} Good</h3></Link>
                 <div className="featProducts__card-stars">
                     {[...Array(5)].map((item, i) => (
                         <FaStar key={i} className={i < Math.round(el.rating.rate) ? 'rate' : 'unrate'} />

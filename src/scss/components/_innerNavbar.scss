@@ -1,0 +1,49 @@
+.innerNavbar {
+    padding: 14px  0;
+    background: #F6F7F8;
+    &__content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+
+        a {
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 21.92px;
+            color: #33A0FF;
+        }
+
+        span {
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 17.05px;
+            color: #C1C8CE;
+        }
+
+        p {
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 21.92px;
+            color: #262626;
+            cursor: pointer;
+        }
+
+        .innerNavbar__link {
+            color: #33A0FF;
+        }
+    }
+}
+
+@media (max-width: 454px) { 
+    .innerNavbar {
+        &__content {
+            a {
+                font-size: 14px;
+            }
+            p {
+                font-size: 14px;
+            }
+        }
+    }
+}
