@@ -4,6 +4,7 @@ import '@/scss/style.scss'
 import SupHeader from "@/components/supHeader/SupHeader";
 import SubHeader from '@/components/subHeader/SubHeader';
 import Footer from "@/components/footer/Footer";
+import Backtop from '@/components/backtop/Backtop';
 
 export const metadata = {
   title: "Welcome E-Comm",
@@ -18,6 +19,7 @@ export default function RootLayout({ children }) {
         <SubHeader/>
         {children}
         <Footer/>
+        <Backtop/>
       </body>
     </html>
   );

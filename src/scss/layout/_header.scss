@@ -178,6 +178,7 @@
 }
 
 .subHeader {
+  transition: .2s;
   background: white;
   padding: 26px 0;
   position: sticky;
@@ -222,6 +223,12 @@
   }
 }
 
+.subHeader.shrink {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 12px 0;
+  padding-top: 14px;
+}
+
 @media (max-width: 1028px) {
   .subHeader {
     &__content {
@@ -232,7 +239,7 @@
         top: 100px;
         left: 0;
         width: 100%;
-        background: #40bfff;
+        background: white;
         box-shadow: 0 3px 5px #0002;
         flex-direction: column;
         gap: 30px;
@@ -254,6 +261,10 @@
 
       .subHeader__links.show {
         transform: scaleY(1);
+      }
+
+      .subHeader__links.shrink {
+        top: 76px;
       }
 
       .menu-btn {

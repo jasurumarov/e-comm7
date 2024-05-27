@@ -1,0 +1,51 @@
+.admin-section {
+    margin-top: 100px;
+    margin-bottom: 100px;
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        gap: 26px;
+
+        h1 {
+            margin-bottom: 15px;
+            font-family: Poppins500;
+            font-size: 36px;
+            line-height: 60px;
+            letter-spacing: -0.02em;
+            color: #262626;
+        }
+
+        p {
+            font-family: Poppins;
+            font-size: 16px;
+            font-weight: 300;
+            line-height: 28.8px;
+            letter-spacing: 0.5px;
+            color: #262626;
+        }
+
+        button {
+            margin-top: 20px;
+            box-shadow: 0px 10px 40px 0px #F8A17033;
+            height: 52px;
+            width: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #40BFFF;
+            color: white;
+            font-family: Poppins600;
+            font-size: 16px;
+            line-height: 30px;
+            border-radius: 8px;
+            transition: .2s;
+
+            &:hover {
+                opacity: .9;
+            }
+
+
+        }
+    }
+}
