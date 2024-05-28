@@ -3,18 +3,22 @@ import React, { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 
 const AdminContent = () => {
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const isLogin = localStorage.getItem("x-auth-token")
+      if (!isLogin) {
+        router.push("/register")
+      }
+    }
+  }, [])
+
   const router = useRouter()
 
-  useEffect(() => {
-    const isLogin = localStorage.getItem("x-auth-token")
-    if (!isLogin) {
-      router.push("/register")
-    }
-  }, [router])
-
   const handleLogout = () => {
-    localStorage.removeItem('x-auth-token')
-    router.push("/")
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('x-auth-token')
+      router.push("/")
+    }
   }
 
   return (
