@@ -1,3 +1,4 @@
+'use client'
 import React from 'react'
 import Link from 'next/link';
 
@@ -6,8 +7,12 @@ import { FaRegUser } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa6";
 import { LuSearch, LuShoppingCart } from "react-icons/lu";
 import { FiHome } from "react-icons/fi";
+import { useSelector } from 'react-redux';
 
 const SupHeader = () => {
+    let isLogin = localStorage.getItem("x-auth-token")
+
+    let wishlist = useSelector(state => state.wishlist.value)
     return (
         <header className='supHeader'>
             <div className="container">
@@ -30,12 +35,12 @@ const SupHeader = () => {
                             <h3>Home</h3>
                         </div>
                         <div className='supHeader__rightSide-links'>
-                            <Link href={"register"}><FaRegUser /></Link>
+                            <Link href={isLogin ? '/admin' : '/register'}><FaRegUser /></Link>
                             <h3>Account</h3>
                         </div>
                         <div className="supHeader__rightSide-links">
-                            <Link href={"wishlist"}><FaRegHeart /></Link>
-                            <sup>0</sup>
+                            <Link href={"/wishlist"}><FaRegHeart /></Link>
+                            <sup>{wishlist.length}</sup>
                             <h3>Wishlist</h3>
                         </div>
                         <div className='supHeader__rightSide-links'>

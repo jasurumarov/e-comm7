@@ -1,24 +1,34 @@
 'use client'
-import React, { useRef, useState } from 'react'
-import { pink } from '@mui/material/colors';
+import React from 'react'
+import Link from 'next/link';
+import Products from '../products/Products';
+import { useDispatch, useSelector } from 'react-redux';
+import { toggleWishlist } from '@/lib/slice/wishlistSlice';
+
+// Colors radio
 import Radio from '@mui/material/Radio';
-import { FaStar } from 'react-icons/fa';
+import { pink } from '@mui/material/colors';
+
+// Images
+import { FaHeart, FaStar } from 'react-icons/fa';
 import { FaRegHeart } from "react-icons/fa6";
 import { FaFacebookF, FaTwitter } from 'react-icons/fa'
 import { FiShoppingCart } from 'react-icons/fi';
-import Link from 'next/link';
 import Image from 'next/image';
 
 // Swiper
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Autoplay } from 'swiper/modules';
-
 import 'swiper/css';
 import 'swiper/css/pagination';
-import Products from '../products/Products';
 
 
 const DetailProductContent = ({ data, singleProduct }) => {
+    // Wishlist
+    let wishlist = useSelector(state => state.wishlist.value)
+    const dispatch = useDispatch()
+
+    // Colors radio
     const [selectedValue, setSelectedValue] = React.useState('a');
 
     const handleChange = (event) => {
@@ -33,6 +43,7 @@ const DetailProductContent = ({ data, singleProduct }) => {
         inputProps: { 'aria-label': item },
     });
 
+    // Best Product mapping (aside)
     let bestProduct = data.slice(0, 4)?.map(el => (
         <SwiperSlide className='aside-card'>
             <div className='aside-card__img'>
@@ -52,6 +63,7 @@ const DetailProductContent = ({ data, singleProduct }) => {
         </SwiperSlide>
     ))
 
+    // Detailed Product
     let product = (
         <div className="detail__product">
             <div className="detail__product-left">
@@ -146,8 +158,14 @@ const DetailProductContent = ({ data, singleProduct }) => {
                             <FiShoppingCart />
                             Add To Cart
                         </button>
-                        <button className="detail__product-right__actions-wishlist">
-                            <FaRegHeart />
+                        <button onClick={() => dispatch(toggleWishlist(data))} className="detail__product-right__actions-wishlist">
+                            {
+                                wishlist?.some(item => item.id === data.id)
+                                    ?
+                                    <FaHeart style={{ color: "red" }} />
+                                    :
+                                    <FaRegHeart />
+                            }
                         </button>
                     </article>
                 </div>

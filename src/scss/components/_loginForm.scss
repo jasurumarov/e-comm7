@@ -79,6 +79,11 @@
                     opacity: .9;
                 }
 
+                &:disabled {
+                    cursor: default;
+                    opacity: .5;
+                }
+
             }
         }
     }

@@ -1,14 +1,21 @@
 'use client'
 import React, { useState } from 'react'
 import Image from 'next/image'
+import { useDispatch, useSelector } from 'react-redux';
 
 // Icons
-import { FaStar } from "react-icons/fa";
+import { FaHeart, FaStar } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa6";
 import { LuShoppingCart } from "react-icons/lu";
 import Link from 'next/link';
+import { toggleWishlist } from '@/lib/slice/wishlistSlice';
 
 const Products = ({ data, category }) => {
+    // Wishlist
+    let wishlist = useSelector(state => state.wishlist.value)
+    const dispatch = useDispatch()
+    console.log(data);
+
     const [valueOfCategory, setValueOfCategory] = useState('all')
 
     let categories = category?.map((el, i) => (
@@ -23,7 +30,15 @@ const Products = ({ data, category }) => {
             <div className="products__card-img">
                 <Image src={el.image} alt={el.title} width={298} height={276} />
                 <div>
-                    <button><FaRegHeart /></button>
+                    <button onClick={() => dispatch(toggleWishlist(el))}>
+                        {
+                            wishlist?.some(item => item.id === el.id)
+                                ?
+                                <FaHeart style={{ color: "red" }} />
+                                :
+                                <FaRegHeart />
+                        }
+                    </button>
                     <button><LuShoppingCart /></button>
                 </div>
             </div>

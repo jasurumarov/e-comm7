@@ -1,4 +1,6 @@
 import '@/scss/style.scss'
+import store from '@/lib/store';
+import StoreProvider from './StoreProvider';
 
 // Components
 import SupHeader from "@/components/supHeader/SupHeader";
@@ -15,11 +17,13 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <SupHeader/>
-        <SubHeader/>
-        {children}
-        <Footer/>
-        <Backtop/>
+        <StoreProvider store={store}>
+          <SupHeader />
+          <SubHeader />
+          {children}
+          <Footer />
+          <Backtop />
+        </StoreProvider>
       </body>
     </html>
   );

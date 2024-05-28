@@ -3,6 +3,7 @@ import InnerNavbar from '@/components/innerNavbar/InnerNavbar'
 import React from 'react'
 
 const Admin = () => {
+    
     return (
         <main className='admin-page'>
             <InnerNavbar outerPage={<></>} activePage={"Admin"} />
