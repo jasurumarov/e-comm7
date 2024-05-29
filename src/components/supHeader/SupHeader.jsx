@@ -13,6 +13,7 @@ const SupHeader = () => {
     let isLogin = localStorage.getItem("x-auth-token")
 
     let wishlist = useSelector(state => state.wishlist.value)
+    let cart = useSelector(state => state.cart.value)
     return (
         <header className='supHeader'>
             <div className="container">
@@ -45,7 +46,7 @@ const SupHeader = () => {
                         </div>
                         <div className='supHeader__rightSide-links'>
                             <Link href={"/cart"}><LuShoppingCart /></Link>
-                            <sup>1</sup>
+                            <sup>{cart.length}</sup>
                             <h3>Cart</h3>
                         </div>
                         <div className='supHeader__rightSide-search'>

@@ -1,40 +1,87 @@
-import React from 'react'
+'use client'
+import Image from 'next/image'
+import React, { useState } from 'react'
+import { decrementCartQuantity, incrementCartQuantity, removeItemFromCart } from '@/lib/slice/cartSlice'
+import { useDispatch, useSelector } from 'react-redux'
 
 // Icons
 import { IoCloseSharp } from 'react-icons/io5'
+import Payment from '../payment/Payment'
+import Empty from '../empty/Empty'
 
 const CartContent = () => {
-    return (
-        <section className='cart-section'>
-            <div className="container">
-                <div className="cart__table">
-                    <div className="cart__table-title">
-                        <h2>PRODUCT</h2>
-                        <h2>PRICE</h2>
-                        <h2>QTY</h2>
-                        <h2>UNIT PRICE</h2>
-                    </div>
-                    <div className="cart__table-products">
-                        <div className="cart__table-product">
-                            <div className="cart__table-product__title">
-                                <button><IoCloseSharp /></button>
-                                <div>
-                                    <img src="" alt="" />
-                                    <h3>Nike Airmax 270 react</h3>
-                                </div>
-                            </div>
-                            <p>$998</p>
-                            <div className="cart__table-product__qty">
-                                <button>-</button>
-                                <span>2</span>
-                                <button>+</button>
-                            </div>
-                            <p>$499</p>
-                        </div>
-                    </div>
+    let [payment, setPayment] = useState(false)
+
+    let cart = useSelector(s => s.cart.value)
+    let dispatch = useDispatch(s => s.cart.value)
+    let product = cart?.map(el => (
+        <div key={el.id} className="cart__table-product">
+            <div className="cart__table-product__title">
+                <button onClick={() => dispatch(removeItemFromCart(el))}><IoCloseSharp /></button>
+                <div>
+                    <article>
+                        <Image width={100} height={200} src={el.image} alt={el.title} />
+                    </article>
+                    <h3>{el.title}</h3>
                 </div>
             </div>
-        </section>
+            <p>${Math.round(el.price)}</p>
+            <div className="cart__table-product__qty">
+                <button disabled={el.quantity <= 1} onClick={() => dispatch(decrementCartQuantity(el))}>-</button>
+                <span>{el.quantity}</span>
+                <button onClick={() => dispatch(incrementCartQuantity(el))}>+</button>
+            </div>
+            <p>${Math.round(el.price * el.quantity)}</p>
+        </div>
+    ))
+
+    let totalPrice = cart?.reduce((sum, item) => sum + (item.price * item.quantity), 0)
+    return (
+        <>
+            {
+                cart.length ?
+                    <section className='cart-section'>
+                        <div className="container">
+                            <div className="cart__table">
+                                <div className="cart__table-title">
+                                    <h2>PRODUCT</h2>
+                                    <h2>PRICE</h2>
+                                    <h2>QTY</h2>
+                                    <h2>UNIT PRICE</h2>
+                                </div>
+                                <div className="cart__table-products">
+                                    {product}
+                                </div>
+                            </div>
+                            <div className="cart__shopping">
+                                <form className="cart__shopping-vaucher">
+                                    <input type="text" placeholder='Voucher code' />
+                                    <button>Redeem</button>
+                                </form>
+                                <div className="cart__shopping-total">
+                                    <ul>
+                                        <li>Subtotal <p>$998</p></li>
+                                        <li>Shipping fee <p>$20</p></li>
+                                        <li>Coupon <p>No</p></li>
+                                    </ul>
+                                    <div>
+                                        <h3>TOTAL</h3>
+                                        <h3>${totalPrice + 20}</h3>
+                                    </div>
+                                    <button onClick={() => setPayment(p => !p)}>Check out</button>
+                                </div>
+                            </div>
+                        </div>
+                        {
+                            payment ? <Payment payment={payment} setPayment={setPayment} /> : <></>
+                        }
+                    </section>
+                    :
+                    <div style={{marginTop: '134px'}}>
+                        <Empty />
+                    </div>
+            }
+        </>
     )
 }
 

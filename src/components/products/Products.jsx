@@ -1,20 +1,21 @@
 'use client'
 import React, { useState } from 'react'
+import Link from 'next/link';
 import Image from 'next/image'
 import { useDispatch, useSelector } from 'react-redux';
+import { toggleWishlist } from '@/lib/slice/wishlistSlice';
+import { addToCart } from '@/lib/slice/cartSlice';
+import { toast } from 'react-toastify';
 
 // Icons
 import { FaHeart, FaStar } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa6";
 import { LuShoppingCart } from "react-icons/lu";
-import Link from 'next/link';
-import { toggleWishlist } from '@/lib/slice/wishlistSlice';
 
 const Products = ({ data, category }) => {
     // Wishlist
     let wishlist = useSelector(state => state.wishlist.value)
     const dispatch = useDispatch()
-    console.log(data);
 
     const [valueOfCategory, setValueOfCategory] = useState('all')
 
@@ -39,7 +40,10 @@ const Products = ({ data, category }) => {
                                 <FaRegHeart />
                         }
                     </button>
-                    <button><LuShoppingCart /></button>
+                    <button onClick={() => {
+                        dispatch(addToCart(el))
+                        toast.success("Product has been added to cart")
+                    }}><LuShoppingCart /></button>
                 </div>
             </div>
             <Link href={`/product/${el.id}`}><h3>{el.title}</h3></Link>
