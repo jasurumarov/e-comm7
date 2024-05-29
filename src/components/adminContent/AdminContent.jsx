@@ -1,20 +1,22 @@
 'use client'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { redirect } from 'next/navigation'
 import { useRouter } from 'next/navigation'
 
 const AdminContent = () => {
-  let isLogin = localStorage.getItem("x-auth-token")
-  if (!isLogin) {
-    return redirect("/register")
-  }
-
   let router = useRouter()
+  useEffect(() => {
+    let isLogin = localStorage.getItem("x-auth-token")
+    if (!isLogin) {
+      return redirect("/register")
+    }
+  }, [router])
+
   let handleLogout = () => {
     localStorage.removeItem('x-auth-token')
     router.push("/")
   }
-  
+
   return (
     <section className='admin-section'>
       <div className="container">

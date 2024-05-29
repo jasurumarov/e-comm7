@@ -45,7 +45,7 @@ const Products = ({ data, category }) => {
             <Link href={`/product/${el.id}`}><h3>{el.title}</h3></Link>
             <div className='products__card-stars'>
                 {[...Array(5)].map((item, i) => (
-                    <FaStar key={i} className={i < Math.round(el.rating.rate) ? 'rate' : 'unrate'} />
+                    <FaStar key={i} className={i < Math.round(el?.rating?.rate) ? 'rate' : 'unrate'} />
                 ))}
             </div>
             {/* <div className='products__card-stars'>{Array(Math.round(el.rating.rate)).fill(<FaStar className='rate'/>) } {Array(5 - Math.round(el.rating.rate)).fill(<FaStar className='unrate'/>) }</div> */}

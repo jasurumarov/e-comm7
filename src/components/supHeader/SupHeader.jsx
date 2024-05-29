@@ -44,7 +44,7 @@ const SupHeader = () => {
                             <h3>Wishlist</h3>
                         </div>
                         <div className='supHeader__rightSide-links'>
-                            <Link href={"carts"}><LuShoppingCart /></Link>
+                            <Link href={"/cart"}><LuShoppingCart /></Link>
                             <sup>1</sup>
                             <h3>Cart</h3>
                         </div>

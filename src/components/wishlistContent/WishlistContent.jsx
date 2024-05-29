@@ -13,7 +13,6 @@ const WishlistContent = () => {
                 ?
                 <Products data={data} category={[]} />
                 :
-                // <h1>sad</h1>
                 <Empty />
             }
         </div>

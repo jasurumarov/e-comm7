@@ -41,3 +41,14 @@
         }
     }
 }
+
+.cart-page {
+    .innerNavbar {
+        .first-slash {
+            display: none !important;
+        }
+        .innerNavbar__link {
+            display: none !important;
+        }
+    }
+}

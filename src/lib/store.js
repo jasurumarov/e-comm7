@@ -1,10 +1,12 @@
-import { configureStore } from '@reduxjs/toolkit';
-import wishlistSlice from './slice/wishlistSlice';
+import { configureStore } from '@reduxjs/toolkit'
 
-const store = configureStore({
-  reducer: {
-    wishlist: wishlistSlice,
-  },
-});
+// Slice
+import wishlistSlice from './slice/wishlistSlice'
 
-export default store;
+export const store = () => {
+    return configureStore({
+        reducer: {
+            wishlist: wishlistSlice
+        },
+    })
+}
