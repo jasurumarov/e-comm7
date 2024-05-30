@@ -21,6 +21,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
+import { toast } from 'react-toastify';
+import { addToCart } from '@/lib/slice/cartSlice';
 
 
 const DetailProductContent = ({ data, singleProduct }) => {
@@ -154,7 +156,10 @@ const DetailProductContent = ({ data, singleProduct }) => {
                         <button>+</button>
                     </div>
                     <article>
-                        <button className="detail__product-right__actions-cart">
+                        <button onClick={() => {
+                            dispatch(addToCart(singleProduct))
+                            toast.success("Product is added to cart")
+                        }} className="detail__product-right__actions-cart">
                             <FiShoppingCart />
                             Add To Cart
                         </button>

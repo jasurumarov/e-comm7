@@ -66,7 +66,7 @@ const CartContent = () => {
                                     </ul>
                                     <div>
                                         <h3>TOTAL</h3>
-                                        <h3>${totalPrice + 20}</h3>
+                                        <h3>${Math.round(totalPrice + 20)}</h3>
                                     </div>
                                     <button onClick={() => setPayment(p => !p)}>Check out</button>
                                 </div>
@@ -77,8 +77,8 @@ const CartContent = () => {
                         }
                     </section>
                     :
-                    <div style={{marginTop: '134px'}}>
-                        <Empty />
+                    <div style={{ marginTop: '134px' }}>
+                        <Empty data={'cart'} />
                     </div>
             }
         </>

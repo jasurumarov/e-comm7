@@ -42,7 +42,7 @@ const Products = ({ data, category }) => {
                     </button>
                     <button onClick={() => {
                         dispatch(addToCart(el))
-                        toast.success("Product has been added to cart")
+                        toast.success("Product is added to cart")
                     }}><LuShoppingCart /></button>
                 </div>
             </div>
