@@ -21,7 +21,7 @@ const Products = ({ data, category }) => {
     useEffect(() => {
         dispatch(toggleWishlist(JSON.parse(localStorage.getItem("wishlist")) || []))
         dispatch(addToCart(JSON.parse(localStorage.getItem("cart")) || []))
-    }, [])
+    }, [dispatch])
 
     const handleWishlist = payload => {
         let index = wishlist.findIndex(el => el.id === payload.id);
@@ -34,7 +34,7 @@ const Products = ({ data, category }) => {
         dispatch(toggleWishlist(result))
         localStorage.setItem("wishlist", JSON.stringify(result))
     }
-    
+
     const handleCart = payload => {
         let index = cart.findIndex(el => el.id === payload.id);
         let result = null

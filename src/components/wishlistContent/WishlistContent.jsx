@@ -1,19 +1,23 @@
 'use client'
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { toggleWishlist } from '@/lib/slice/wishlistSlice'
 import Products from '@/components/products/Products'
 import Empty from '@/components/empty/Empty'
 
-
 const WishlistContent = () => {
-    let data = useSelector(state => state.wishlist.value)
+    const dispatch = useDispatch()
+    const data = useSelector(state => state.wishlist.value)
+
+    useEffect(() => {
+        dispatch(toggleWishlist(JSON.parse(localStorage.getItem("wishlist")) || []))
+    }, [dispatch])
+
     return (
         <div>
-            {data.length
-                ?
-                <Products data={data} category={[]} />
-                :
-                <Empty data={'wishlist'}/>
+            {data.length > 0
+                ? <Products data={data} category={[]} />
+                : <Empty data={'wishlist'} />
             }
         </div>
     )
