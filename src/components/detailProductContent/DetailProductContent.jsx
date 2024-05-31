@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useEffect } from 'react'
 import Link from 'next/link';
 import Products from '../products/Products';
 import { useDispatch, useSelector } from 'react-redux';
@@ -28,7 +28,40 @@ import { addToCart } from '@/lib/slice/cartSlice';
 const DetailProductContent = ({ data, singleProduct }) => {
     // Wishlist
     let wishlist = useSelector(state => state.wishlist.value)
+    let cart = useSelector(state => state.cart.value)
     const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(toggleWishlist(JSON.parse(localStorage.getItem("wishlist")) || []))
+        dispatch(addToCart(JSON.parse(localStorage.getItem("cart")) || []))
+    }, [])
+
+    const handleWishlist = payload => {
+        let index = wishlist.findIndex(el => el.id === payload.id);
+        let result = null
+        if (index < 0) {
+            result = [...wishlist, payload]
+        } else {
+            result = wishlist.filter(el => el.id !== payload.id)
+        }
+        dispatch(toggleWishlist(result))
+        localStorage.setItem("wishlist", JSON.stringify(result))
+    }
+
+    const handleCart = payload => {
+        let index = cart.findIndex(el => el.id === payload.id);
+        let result = null
+        if (index < 0) {
+            result = [...cart, { ...payload, quantity: 1 }]
+        } else {
+            result = cart.map((el, inx) =>
+                inx === index ? { ...el, quantity: el.quantity + 1 } : el
+            );
+        }
+        dispatch(addToCart(result))
+        localStorage.setItem("cart", JSON.stringify(result))
+        toast.success("Product is added to cart")
+    }
 
     // Colors radio
     const [selectedValue, setSelectedValue] = React.useState('a');
@@ -47,7 +80,7 @@ const DetailProductContent = ({ data, singleProduct }) => {
 
     // Best Product mapping (aside)
     let bestProduct = data.slice(0, 4)?.map(el => (
-        <SwiperSlide className='aside-card'>
+        <SwiperSlide key={el.id} className='aside-card'>
             <div className='aside-card__img'>
                 <Link href={`/product/${el.id}`}>
                     <Image src={el.image} alt={el.title} width={100} height={100} />
@@ -156,20 +189,16 @@ const DetailProductContent = ({ data, singleProduct }) => {
                         <button>+</button>
                     </div>
                     <article>
-                        <button onClick={() => {
-                            dispatch(addToCart(singleProduct))
-                            toast.success("Product is added to cart")
-                        }} className="detail__product-right__actions-cart">
+                        <button onClick={() => handleCart(singleProduct)} className="detail__product-right__actions-cart">
                             <FiShoppingCart />
                             Add To Cart
                         </button>
-                        <button onClick={() => dispatch(toggleWishlist(data))} className="detail__product-right__actions-wishlist">
+                        <button onClick={() => handleWishlist(singleProduct)} className="detail__product-right__actions-wishlist">
                             {
-                                wishlist?.some(item => item.id === data.id)
-                                    ?
-                                    <FaHeart style={{ color: "red" }} />
-                                    :
-                                    <FaRegHeart />
+                                wishlist?.some(item => item.id === singleProduct.id)
+                                    ? <FaHeart style={{ color: "red" }} />
+                                    : <FaRegHeart />
+
                             }
                         </button>
                     </article>

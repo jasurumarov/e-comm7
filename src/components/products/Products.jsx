@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image'
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleWishlist } from '@/lib/slice/wishlistSlice';
-// import { addToCart } from '@/lib/slice/cartSlice';
+import { addToCart } from '@/lib/slice/cartSlice';
 import { toast } from 'react-toastify';
 
 // Icons
@@ -15,11 +15,12 @@ import { LuShoppingCart } from "react-icons/lu";
 const Products = ({ data, category }) => {
     // Wishlist
     let wishlist = useSelector(state => state.wishlist.value)
+    let cart = useSelector(state => state.cart.value)
     const dispatch = useDispatch()
 
     useEffect(() => {
         dispatch(toggleWishlist(JSON.parse(localStorage.getItem("wishlist")) || []))
-
+        dispatch(addToCart(JSON.parse(localStorage.getItem("cart")) || []))
     }, [])
 
     const handleWishlist = payload => {
@@ -32,6 +33,21 @@ const Products = ({ data, category }) => {
         }
         dispatch(toggleWishlist(result))
         localStorage.setItem("wishlist", JSON.stringify(result))
+    }
+    
+    const handleCart = payload => {
+        let index = cart.findIndex(el => el.id === payload.id);
+        let result = null
+        if (index < 0) {
+            result = [...cart, { ...payload, quantity: 1 }]
+        } else {
+            result = cart.map((el, inx) =>
+                inx === index ? { ...el, quantity: el.quantity + 1 } : el
+            );
+        }
+        dispatch(addToCart(result))
+        localStorage.setItem("cart", JSON.stringify(result))
+        toast.success("Product is added to cart")
     }
 
     const [valueOfCategory, setValueOfCategory] = useState('all')
@@ -65,10 +81,7 @@ const Products = ({ data, category }) => {
                                 <FaRegHeart />
                         }
                     </button>
-                    {/* <button onClick={() => {
-                        dispatch(addToCart(el))
-                        toast.success("Product is added to cart")
-                    }}><LuShoppingCart /></button> */}
+                    <button onClick={() => handleCart(el)}><LuShoppingCart /></button>
                 </div>
             </div>
             <Link href={`/product/${el.id}`}><h3>{el.title}</h3></Link>
