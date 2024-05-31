@@ -14,7 +14,7 @@ const AdminContent = () => {
 
   let handleLogout = () => {
     localStorage.removeItem('x-auth-token')
-    router.push("/")
+    router.push("/register")
   }
 
   return (
