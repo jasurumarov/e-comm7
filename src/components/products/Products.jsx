@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link';
 import Image from 'next/image'
 import { useDispatch, useSelector } from 'react-redux';
@@ -16,6 +16,23 @@ const Products = ({ data, category }) => {
     // Wishlist
     let wishlist = useSelector(state => state.wishlist.value)
     const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(toggleWishlist(JSON.parse(localStorage.getItem("wishlist")) || []))
+
+    }, [])
+
+    const handleWishlist = payload => {
+        let index = wishlist.findIndex(el => el.id === payload.id);
+        let result = null
+        if (index < 0) {
+            result = [...wishlist, payload]
+        } else {
+            result = wishlist.filter(el => el.id !== payload.id)
+        }
+        dispatch(toggleWishlist(result))
+        localStorage.setItem("wishlist", JSON.stringify(result))
+    }
 
     const [valueOfCategory, setValueOfCategory] = useState('all')
     const [visibleProducts, setVisibleProducts] = useState(8);
@@ -39,7 +56,7 @@ const Products = ({ data, category }) => {
             <div className="products__card-img">
                 <Image src={el.image} alt={el.title} width={298} height={276} />
                 <div>
-                    <button onClick={() => dispatch(toggleWishlist(el))}>
+                    <button onClick={() => handleWishlist(el)}>
                         {
                             wishlist?.some(item => item.id === el.id)
                                 ?
