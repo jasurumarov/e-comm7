@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image'
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleWishlist } from '@/lib/slice/wishlistSlice';
-import { addToCart } from '@/lib/slice/cartSlice';
+// import { addToCart } from '@/lib/slice/cartSlice';
 import { toast } from 'react-toastify';
 
 // Icons
@@ -65,10 +65,10 @@ const Products = ({ data, category }) => {
                                 <FaRegHeart />
                         }
                     </button>
-                    <button onClick={() => {
+                    {/* <button onClick={() => {
                         dispatch(addToCart(el))
                         toast.success("Product is added to cart")
-                    }}><LuShoppingCart /></button>
+                    }}><LuShoppingCart /></button> */}
                 </div>
             </div>
             <Link href={`/product/${el.id}`}><h3>{el.title}</h3></Link>

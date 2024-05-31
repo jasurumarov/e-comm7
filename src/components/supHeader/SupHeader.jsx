@@ -10,10 +10,10 @@ import { FiHome } from "react-icons/fi";
 import { useSelector } from 'react-redux';
 
 const SupHeader = () => {
-    let isLogin = localStorage.getItem("x-auth-token")
+    // let isLogin = localStorage.getItem("x-auth-token")
 
     let wishlist = useSelector(state => state.wishlist.value)
-    let cart = useSelector(state => state.cart.value)
+    // let cart = useSelector(state => state.cart.value)
     return (
         <header className='supHeader'>
             <div className="container">
@@ -35,10 +35,10 @@ const SupHeader = () => {
                             <Link href={"register"}><FiHome /></Link>
                             <h3>Home</h3>
                         </div>
-                        <div className='supHeader__rightSide-links'>
+                        {/* <div className='supHeader__rightSide-links'>
                             <Link href={isLogin ? '/admin' : '/register'}><FaRegUser /></Link>
                             <h3>Account</h3>
-                        </div>
+                        </div> */}
                         <div className="supHeader__rightSide-links">
                             <Link href={"/wishlist"}><FaRegHeart /></Link>
                             <sup>{wishlist.length}</sup>
@@ -46,7 +46,7 @@ const SupHeader = () => {
                         </div>
                         <div className='supHeader__rightSide-links'>
                             <Link href={"/cart"}><LuShoppingCart /></Link>
-                            <sup>{cart.length}</sup>
+                            {/* <sup>{cart.length}</sup> */}
                             <h3>Cart</h3>
                         </div>
                         <div className='supHeader__rightSide-search'>

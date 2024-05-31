@@ -1,6 +1,5 @@
 import '@/scss/style.scss'
 import 'react-toastify/dist/ReactToastify.css';
-import store from '@/lib/store';
 import StoreProvider from './StoreProvider';
 import { ToastContainer } from 'react-toastify';
 
@@ -19,7 +18,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <StoreProvider store={store}>
+        <StoreProvider>
           <SupHeader />
           <SubHeader />
           {children}
