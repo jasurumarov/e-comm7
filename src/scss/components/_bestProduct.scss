@@ -10,6 +10,7 @@
 
         div {
             max-width: 592px;
+
             h3 {
                 font-family: Poppins500;
                 font-size: 55px;
@@ -34,19 +35,39 @@
                 border-bottom: 3px solid #fff;
             }
         }
+
         img {
             margin-right: -100px;
         }
     }
 }
 
-@media (max-width: 1338px) {
+@media (max-width: 1514px) {
     .bestProduct-section {
         padding-bottom: 48px;
+
+        &__content {
+            img {
+                margin: 0;
+                width: 100%;
+                object-fit: contain;
+                order: -1;
+            }
+
+            div {
+                max-width: 1400px;
+            }
+        }
+    }
+}
+
+@media (max-width: 1338px) {
+    .bestProduct-section {
         &__content {
             img {
                 order: -1;
             }
+
             div {
                 max-width: 1400px;
             }
@@ -72,8 +93,10 @@
             img {
                 margin-top: -100px;
             }
+
             div {
                 margin-top: -160px;
+
                 h3 {
                     font-size: 34px;
                 }
