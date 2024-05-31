@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link';
 
 // Icons
@@ -10,10 +10,17 @@ import { FiHome } from "react-icons/fi";
 import { useSelector } from 'react-redux';
 
 const SupHeader = () => {
-    let isLogin = localStorage.getItem("x-auth-token")
+    const [isLogin, setIsLogin] = useState(false);
+    const wishlist = useSelector(state => state.wishlist.value);
+    const cart = useSelector(state => state.cart.value);
 
-    let wishlist = useSelector(state => state.wishlist.value)
-    let cart = useSelector(state => state.cart.value)
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            const token = localStorage.getItem("x-auth-token");
+            setIsLogin(!!token);
+        }
+    }, []);
+
     return (
         <header className='supHeader'>
             <div className="container">
@@ -32,7 +39,7 @@ const SupHeader = () => {
                     </div>
                     <div className='supHeader__rightSide'>
                         <div className='supHeader__rightSide-links'>
-                            <Link href={"register"}><FiHome /></Link>
+                            <Link href={"/"}><FiHome /></Link>
                             <h3>Home</h3>
                         </div>
                         <div className='supHeader__rightSide-links'>
@@ -60,4 +67,4 @@ const SupHeader = () => {
     )
 }
 
-export default SupHeader
+export default SupHeader;

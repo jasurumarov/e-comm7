@@ -1,10 +1,10 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 // Icons
 import { removeAllItemsFromCart } from '@/lib/slice/cartSlice'
 import { IoCloseSharp } from 'react-icons/io5'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { FiCreditCard } from 'react-icons/fi'
 import { BsPaypal } from "react-icons/bs";
 import { AiOutlineBank } from "react-icons/ai";
@@ -23,6 +23,7 @@ let initialState = {
 }
 
 const Payment = ({ setPayment, products }) => {
+    let cart = useSelector(s => s.cart.value)
     let dispatch = useDispatch()
     let [data, setData] = useState(initialState)
 
@@ -50,6 +51,7 @@ const Payment = ({ setPayment, products }) => {
         api.send()
         setData(initialState)
         setPayment(p => !p)
+        localStorage.removeItem("cart");
         dispatch(removeAllItemsFromCart())
     }
     return (

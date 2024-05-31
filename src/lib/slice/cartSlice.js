@@ -22,10 +22,9 @@ const cartSlice = createSlice({
         decrementCartQuantity: (state, action) => {
             state.value = action.payload
         },
-        // removeAllItemsFromCart: (state) => {
-        //     state.value = []
-        //     localStorage.removeItem("cart");
-        // }
+        removeAllItemsFromCart: (state) => {
+            state.value = []
+        }
     }
 })
 
