@@ -76,3 +76,16 @@
         }
     }
 }
+
+@media (max-width: 426px) {
+    .heroProducts-section {
+        &__content {
+            div {
+                img {
+                    width: 100%;
+                    
+                }
+            }
+        }
+    }
+}

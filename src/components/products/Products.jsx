@@ -18,15 +18,23 @@ const Products = ({ data, category }) => {
     const dispatch = useDispatch()
 
     const [valueOfCategory, setValueOfCategory] = useState('all')
+    const [visibleProducts, setVisibleProducts] = useState(8);
 
     let categories = category?.map((el, i) => (
-        <li className={valueOfCategory === el ? 'active' : ''} onClick={() => setValueOfCategory(el)} key={i}>{el}</li>
+        <li className={valueOfCategory === el ? 'active' : ''} onClick={() => {
+            setValueOfCategory(el)
+            setVisibleProducts(4)
+        }} key={i}>{el}</li>
     ))
 
     const filteredProducts = valueOfCategory === 'all' ? data : data.filter(el => el.category === valueOfCategory);
+    const displayedProducts = filteredProducts.slice(0, visibleProducts);
 
+    const handleLoadMore = () => {
+        setVisibleProducts(prev => prev + 8);
+    };
 
-    let products = filteredProducts?.map(el => (
+    let products = displayedProducts?.map(el => (
         <div key={el.id} className="products__card">
             <div className="products__card-img">
                 <Image src={el.image} alt={el.title} width={298} height={276} />
@@ -65,15 +73,20 @@ const Products = ({ data, category }) => {
                 <div className="products-section__content">
                     <h2>BEST SELLER</h2>
                     <ul>
-                        <li value={"all"} className={valueOfCategory === 'all' ? "active" : ''} onClick={() => setValueOfCategory('all')}>All</li>
+                        <li value={"all"} className={valueOfCategory === 'all' ? "active" : ''} onClick={() => {
+                            setValueOfCategory('all')
+                            setVisibleProducts(8);
+                        }}>All</li>
                         {categories}
                     </ul>
                     <div className="products__cards">
                         {products}
                     </div>
-                    <div className="see-more">
-                        <button>LOAD MORE</button>
-                    </div>
+                    {visibleProducts < filteredProducts.length && (
+                        <div className="see-more">
+                            <button onClick={handleLoadMore}>LOAD MORE</button>
+                        </div>
+                    )}
                 </div>
             </div>
         </section>

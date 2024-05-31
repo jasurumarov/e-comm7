@@ -10,8 +10,10 @@
 }
 
 .payment {
-    max-width: 1024px;
-    width: 100%;
+
+
+    max-width: 1000px;
+    width: 90%;
     background: #fff;
     position: fixed;
     z-index: 11;
@@ -51,7 +53,9 @@
 
     .payment__inputs {
         display: flex;
+        flex-wrap: wrap;
         justify-content: space-between;
+        gap: 32px;
         margin-bottom: 32px;
 
         input {
@@ -66,7 +70,9 @@
 
     .payment__area {
         display: flex;
+        flex-wrap: wrap;
         justify-content: space-between;
+        gap: 32px;
 
         input {
             width: 380px;
@@ -94,6 +100,8 @@
     }
 
     .payment__method {
+        max-width: 380px;
+        width: 100%;
         position: absolute;
         top: 396px;
 
@@ -102,14 +110,40 @@
             font-size: 20px;
             line-height: 23.48px;
             color: #40BFFF;
+            margin-bottom: 14px;
         }
+
+        label {
+            display: flex;
+            height: 56px;
+            padding:  0 16px;
+            justify-content: space-between;
+            cursor: pointer;
+
+            div {
+                display: flex;
+                align-items: center;
+                gap: 16px;
+                font-family: Poppins700;
+                font-size: 12px;
+                line-height: 18px;
+                letter-spacing: 0.5px;
+                color: #223263;
+
+                svg {
+                    color: #40BFFF;
+                    font-size: 20px;
+                }
+            }
+        }
+
 
     }
 
     .payment-btn {
         display: flex;
         justify-content: center;
-        margin-top: 100px;
+        margin-top: 120px;
 
         button {
             border-radius: 8px;
@@ -127,30 +161,52 @@
 
         }
     }
+}
 
-    // button {
-    //     transition: .2s;
-    //     background: #3D3D3D;
-    //     color: white;
-    //     width: 100px;
-    //     height: 30px;
-    //     border-radius: 6px;
-    //     &:hover {
-    //         opacity: .93;
-    //     }
-    //     &:active {
-    //         scale: .98;
-    //     }        
-    // }
-    // input {
-    //     padding: 0 8px;
-    // }
-    // input, button {
-    //     width: 100%;
-    //     height: 38px;
-    //     margin-top: 20px;
-    // }
-    // button:disabled {
-    //     background: #aeabab;
-    // }
+@media (max-width: 1062px) {
+    .payment {
+        height: 600px;
+        overflow-y: auto;
+        padding: 40px;
+
+        h2 {
+            margin-bottom: 32px;
+        }
+
+        .payment__inputs {
+            input {
+                width: 100%;
+            }
+        }
+
+        .payment__area {
+            input {
+                width: 100%;
+            }
+
+            div {
+                width: 100%;
+            }
+        }
+
+        .payment__method {
+            position: static;
+            margin-top: 32px;
+            max-width: 1000px;
+            width: 100%;
+        }
+
+        .payment-btn {
+            margin-top: 32px;
+        }
+    }
+}
+
+@media (max-width: 522px) {
+    .payment {
+        h2 {
+            margin-bottom: 32px;
+            font-size: 24px;
+        }
+    }
 }

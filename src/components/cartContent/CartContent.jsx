@@ -1,19 +1,25 @@
 'use client'
 import Image from 'next/image'
 import React, { useState } from 'react'
-import { decrementCartQuantity, incrementCartQuantity, removeItemFromCart } from '@/lib/slice/cartSlice'
-import { useDispatch, useSelector } from 'react-redux'
 
-// Icons
-import { IoCloseSharp } from 'react-icons/io5'
+// Redux Toolkit
+import { useDispatch, useSelector } from 'react-redux'
+import { decrementCartQuantity, incrementCartQuantity, removeItemFromCart } from '@/lib/slice/cartSlice'
+
+// Components
 import Payment from '../payment/Payment'
 import Empty from '../empty/Empty'
 
+// Icons
+import { IoCloseSharp } from 'react-icons/io5'
+
 const CartContent = () => {
+    // State for payment modal
     let [payment, setPayment] = useState(false)
 
     let cart = useSelector(s => s.cart.value)
     let dispatch = useDispatch(s => s.cart.value)
+
     let product = cart?.map(el => (
         <div key={el.id} className="cart__table-product">
             <div className="cart__table-product__title">
@@ -22,10 +28,10 @@ const CartContent = () => {
                     <article>
                         <Image width={100} height={200} src={el.image} alt={el.title} />
                     </article>
-                    <h3>{el.title}</h3>
+                    <h3 title={el.title}>{el.title}</h3>
                 </div>
             </div>
-            <p>${Math.round(el.price)}</p>
+            <p className='cart__table-product__price'>${Math.round(el.price)}</p>
             <div className="cart__table-product__qty">
                 <button disabled={el.quantity <= 1} onClick={() => dispatch(decrementCartQuantity(el))}>-</button>
                 <span>{el.quantity}</span>
@@ -35,11 +41,13 @@ const CartContent = () => {
         </div>
     ))
 
+    // Totalprice
     let totalPrice = cart?.reduce((sum, item) => sum + (item.price * item.quantity), 0)
     return (
         <>
             {
-                cart.length ?
+                cart.length
+                    ?
                     <section className='cart-section'>
                         <div className="container">
                             <div className="cart__table">
@@ -73,7 +81,7 @@ const CartContent = () => {
                             </div>
                         </div>
                         {
-                            payment ? <Payment payment={payment} setPayment={setPayment} /> : <></>
+                            payment ? <Payment products={cart} payment={payment} setPayment={setPayment} /> : <></>
                         }
                     </section>
                     :
