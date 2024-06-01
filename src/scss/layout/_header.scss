@@ -152,6 +152,7 @@
             svg {
               color: #40BFFF;
             }
+
             h3 {
               color: #40bfff;
             }
@@ -162,7 +163,7 @@
             font-size: 14px;
             user-select: none;
             font-family: Poppins500;
-            }
+          }
 
           sup {
             right: -10px;
@@ -204,9 +205,11 @@
         transition: .2s;
         color: #262626;
 
-        &:hover {
-          color: #33A0FF;
-        }
+      }
+
+      a.active {
+        color: #33A0FF;
+
       }
     }
 
