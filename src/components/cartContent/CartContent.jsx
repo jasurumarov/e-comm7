@@ -12,6 +12,7 @@ import Empty from '../empty/Empty'
 
 // Icons
 import { IoCloseSharp } from 'react-icons/io5'
+import Link from 'next/link'
 
 const CartContent = () => {
     // State for payment modal toggle with body no scroll logic
@@ -68,9 +69,9 @@ const CartContent = () => {
                 <button onClick={() => handleRemoveItem(el)}><IoCloseSharp /></button>
                 <div>
                     <article>
-                        <Image width={100} height={200} src={el.image} alt={el.title} />
+                        <Link href={`/product/${el.id}`}><Image width={100} height={200} src={el.image} alt={el.title} /></Link>
                     </article>
-                    <h3 title={el.title}>{el.title}</h3>
+                    <Link href={`/product/${el.id}`}><h3 title={el.title}>{el.title}</h3></Link>
                 </div>
             </div>
             <p className='cart__table-product__price'>${Math.round(el.price)}</p>

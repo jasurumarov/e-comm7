@@ -48,12 +48,12 @@ const SupHeader = () => {
                         </div>
                         <div className="supHeader__rightSide-links">
                             <Link href={"/wishlist"}><FaRegHeart /></Link>
-                            <sup>{wishlist.length}</sup>
+                            <Link href={"/wishlist"}><sup>{wishlist.length}</sup></Link>
                             <h3>Wishlist</h3>
                         </div>
                         <div className='supHeader__rightSide-links'>
                             <Link href={"/cart"}><LuShoppingCart /></Link>
-                            <sup>{cart.length}</sup>
+                            <Link href={"/cart"}><sup>{cart.length}</sup></Link>
                             <h3>Cart</h3>
                         </div>
                         <div className='supHeader__rightSide-search'>
