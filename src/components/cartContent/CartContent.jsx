@@ -14,9 +14,22 @@ import Empty from '../empty/Empty'
 import { IoCloseSharp } from 'react-icons/io5'
 
 const CartContent = () => {
-    // State for payment modal
+    // State for payment modal toggle with body no scroll logic
     let [payment, setPayment] = useState(false)
+    useEffect(() => {
+        if (payment) {
+            document.body.classList.add('no-scroll');
+        } else {
+            document.body.classList.remove('no-scroll');
+            window.scrollTo(0, 0);
+        }
+        return () => {
+            document.body.classList.remove('no-scroll');
+            window.scrollTo(0, 0);
+        };
+    }, [payment]);
 
+    // Redux Toolkit
     let cart = useSelector(s => s.cart.value)
     let dispatch = useDispatch(s => s.cart.value)
 
