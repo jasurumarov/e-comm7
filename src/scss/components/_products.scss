@@ -43,7 +43,6 @@
                 display: flex;
                 flex-wrap: wrap;
                 gap: 32px;
-                justify-content: center;
 
                 .products__card {
                     width: 304px;
@@ -258,6 +257,17 @@
                     }
                 }
             }
+        }
+    }
+}
+
+
+@media (max-width: 1344px) {
+    .products-section {
+        &__content {
+          .products__cards {
+            justify-content: center;
+          }
         }
     }
 }
