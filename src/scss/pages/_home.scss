@@ -30,10 +30,53 @@
     }
 }
 
+
+
+.empty {
+    div {
+        position: absolute;
+        background: white;
+        top: 260px;
+        z-index: 9;
+    }
+}
+
 @media (max-width: 824px) {
     .empty {
         img {
             width: 100%;
+            margin-right: 0 !important;
+        }
+    }
+}
+
+@media (max-width: 650px) {
+    .empty {
+        div {
+            // z-index: -1;
+        }
+        img {
+            margin-top: -280px !important;
+            width: 100%;
+        }
+        h3 {
+            margin-top: -100px !important;
+        }
+    }
+}
+
+@media (max-width: 486px) {
+    .empty {
+        div {
+            top: 180px;
+            width: 100% !important;
+        }
+
+        img {
+            width: 100%;
+        }
+        h3 {
+            margin-top: -140px !important;
         }
     }
 }

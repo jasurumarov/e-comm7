@@ -21,7 +21,6 @@ const CartContent = () => {
             document.body.classList.add('no-scroll');
         } else {
             document.body.classList.remove('no-scroll');
-            window.scrollTo(0, 0);
         }
         return () => {
             document.body.classList.remove('no-scroll');

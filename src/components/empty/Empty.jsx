@@ -7,7 +7,8 @@ import Link from 'next/link'
 const Empty = ({data}) => {
   return (
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', padding: '140px 0' }} className='empty'>
-      <Image style={{marginTop: '-220px',  marginRight: '-20px' }} width={800} src={EmptyImg} alt="" />
+      <div style={{width: '400px', height: '60px'}}></div>
+      <Image style={{marginTop: '-220px',  marginRight: '-20px', objectFit: 'contain' }} width={800} src={EmptyImg} alt="" />
       <h3 style={{marginTop: '-20px', fontSize: '28px'}}>Your {data} is empty!</h3>
       <Link href={"/"}><Button style={{ background: '#40bfff', paddingTop: '8px', marginTop: '20px' }} variant="contained">Continue Shopping</Button></Link>
     </div>
